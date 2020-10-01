@@ -1,8 +1,12 @@
+require("dotenv").config();
+
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const User = require("../models/user");
+
+const nodemailer = require("nodemailer");
 
 exports.signup = async (req, rest, next) => {
   const errors = validationResult(req);
@@ -18,28 +22,19 @@ exports.signup = async (req, rest, next) => {
   const name = req.body.name;
   const password = req.body.password;
 
-  // const msg = {
-  //   from: "noreply@email.com",
-  //   to: email,
-  //   subject: "Verify your email",
-  //   text: `
-  //     Hello, thanks for registering on our site.
-  //     Please copy and paste the addres below to verify yor account.
-  //     http://${req.headers.host}/verify-email?token=${user.emailToken}
-  //   `,
-  //   html: `
-  //     <h1>Hello,</h1>
-  //     <p>thanks for registering on our site.</p>
-  //     <p>Please click the link below to verify your account.</p>
-  //     <a href="http://${req.headers.host}/verify-email?token=${user.emailToken}">Verify your account</a>
-  //   `,
-  // };
+  const isEmailSend = await sendVerificationEmail(
+    emailToken,
+    email,
+    req.headers.host
+  );
 
-  // try {
-  //   await console.log("Wysyłam email");
-  // } catch (err) {
-  //   throw error;
-  // }
+  console.log(isEmailSend);
+
+  if (isEmailSend !== true) {
+    const error = new Error("Email cant be send due " + isEmailSend);
+    error.statusCode = 503;
+    throw error;
+  }
 
   bcrypt
     .hash(password, 12)
@@ -108,7 +103,7 @@ exports.login = (req, res, next) => {
 
 exports.verifyEmail = async (req, res, next) => {
   try {
-    const user = await User.finOne({ emailToken: req.query.token });
+    const user = await User.findOne({ emailToken: req.query.token });
     if (!user) {
       const error = new Error(
         "Token is invalid. Please contact us for assistance"
@@ -127,4 +122,42 @@ exports.verifyEmail = async (req, res, next) => {
     }
     next(err);
   }
+};
+
+const sendVerificationEmail = async (emailToken, email, host) => {
+  let emailIsSend = true;
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  const msg = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Verify your email",
+    text: `
+      Hello, thanks for registering on our site.
+      Please copy and paste the addres below to verify yor account.
+      http://${host}/auth/verify-email?token=${emailToken}
+    `,
+    html: `
+      <h1>Hello,</h1>
+      <p>thanks for registering on our site.</p>
+      <p>Please click the link below to verify your account.</p>
+      <a href="http://${host}/auth/verify-email?token=${emailToken}">Verify your account</a>
+    `,
+  };
+
+  transporter.sendMail(msg, function (err, data) {
+    if (err) {
+      return err;
+    } else {
+      return true;
+    }
+  });
+
+  return emailIsSend;
 };
