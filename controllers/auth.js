@@ -22,41 +22,36 @@ exports.signup = async (req, rest, next) => {
   const name = req.body.name;
   const password = req.body.password;
 
-  const isEmailSend = await sendVerificationEmail(
-    emailToken,
-    email,
-    req.headers.host
-  );
-
-  console.log(isEmailSend);
-
-  if (isEmailSend !== true) {
-    const error = new Error("Email cant be send due " + isEmailSend);
-    error.statusCode = 503;
-    throw error;
-  }
-
-  bcrypt
-    .hash(password, 12)
-    .then((hashedPw) => {
-      const user = new User({
-        email: email,
-        emailToken: emailToken,
-        isVerified: isVerified,
-        password: hashedPw,
-        name: name,
+  sendVerificationEmail(emailToken, email, req.headers.host, function (
+    returnValue
+  ) {
+    if (returnValue !== true) {
+      const error = new Error("Email cant be send due " + returnValue);
+      error.statusCode = 503;
+      throw error;
+    }
+    bcrypt
+      .hash(password, 12)
+      .then((hashedPw) => {
+        const user = new User({
+          email: email,
+          emailToken: emailToken,
+          isVerified: isVerified,
+          password: hashedPw,
+          name: name,
+        });
+        return user.save();
+      })
+      .then((result) => {
+        rest.status(201).json({ message: "User created!", userId: result.id });
+      })
+      .catch((err) => {
+        if (!err.statusCode) {
+          err.statusCode = 500;
+        }
+        next(err);
       });
-      return user.save();
-    })
-    .then((result) => {
-      rest.status(201).json({ message: "User created!", userId: result.id });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+  });
 };
 
 exports.login = (req, res, next) => {
@@ -124,8 +119,7 @@ exports.verifyEmail = async (req, res, next) => {
   }
 };
 
-const sendVerificationEmail = async (emailToken, email, host) => {
-  let emailIsSend = true;
+const sendVerificationEmail = async (emailToken, email, host, callback) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -153,11 +147,9 @@ const sendVerificationEmail = async (emailToken, email, host) => {
 
   transporter.sendMail(msg, function (err, data) {
     if (err) {
-      return err;
+      callback(err);
     } else {
-      return true;
+      callback(true);
     }
   });
-
-  return emailIsSend;
 };
