@@ -8,12 +8,13 @@ const User = require("../models/user");
 
 const nodemailer = require("nodemailer");
 
-exports.signup = async (req, rest, next) => {
+exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed.");
     error.statusCode = 422;
     error.data = errors.array();
+    res.status(422).send({ message: error.data[0].msg });
     throw error;
   }
   const email = req.body.email;
@@ -21,13 +22,13 @@ exports.signup = async (req, rest, next) => {
   const isVerified = false;
   const name = req.body.name;
   const password = req.body.password;
-
   sendVerificationEmail(emailToken, email, req.headers.host, function (
     returnValue
   ) {
     if (returnValue !== true) {
       const error = new Error("Email cant be send due " + returnValue);
       error.statusCode = 503;
+      res.status(503).send({ message: error });
       throw error;
     }
     bcrypt
@@ -43,7 +44,7 @@ exports.signup = async (req, rest, next) => {
         return user.save();
       })
       .then((result) => {
-        rest.status(201).json({ message: "User created!", userId: result.id });
+        res.status(201).json({ message: "User created!", userId: result.id });
       })
       .catch((err) => {
         if (!err.statusCode) {
@@ -67,6 +68,7 @@ exports.login = (req, res, next) => {
       if (!user) {
         const error = new Error("A user with this email could not be found.");
         error.statusCode = 401;
+        res.status(401).send({ message: error });
         throw error;
       }
       loadeduser = user;
@@ -76,6 +78,7 @@ exports.login = (req, res, next) => {
       if (!isEqual) {
         const error = new Error("Wrong password!");
         error.statusCode = 401;
+        res.status(401).send({ message: error });
         throw error;
       }
       const token = jwt.sign(
