@@ -10,13 +10,15 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  emailToken: {
+    type: DataTypes.STRING,
+  },
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+  },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  status: {
-    type: DataTypes.STRING,
-    defaultValue: "I am new!",
   },
 });
 

@@ -1,10 +1,10 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const crypto = require("crypto");
 const User = require("../models/user");
 
-exports.signup = (req, rest, next) => {
+exports.signup = async (req, rest, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed.");
@@ -13,13 +13,41 @@ exports.signup = (req, rest, next) => {
     throw error;
   }
   const email = req.body.email;
+  const emailToken = crypto.randomBytes(64).toString("hex");
+  const isVerified = false;
   const name = req.body.name;
   const password = req.body.password;
+
+  // const msg = {
+  //   from: "noreply@email.com",
+  //   to: email,
+  //   subject: "Verify your email",
+  //   text: `
+  //     Hello, thanks for registering on our site.
+  //     Please copy and paste the addres below to verify yor account.
+  //     http://${req.headers.host}/verify-email?token=${user.emailToken}
+  //   `,
+  //   html: `
+  //     <h1>Hello,</h1>
+  //     <p>thanks for registering on our site.</p>
+  //     <p>Please click the link below to verify your account.</p>
+  //     <a href="http://${req.headers.host}/verify-email?token=${user.emailToken}">Verify your account</a>
+  //   `,
+  // };
+
+  // try {
+  //   await console.log("Wysyłam email");
+  // } catch (err) {
+  //   throw error;
+  // }
+
   bcrypt
     .hash(password, 12)
     .then((hashedPw) => {
       const user = new User({
         email: email,
+        emailToken: emailToken,
+        isVerified: isVerified,
         password: hashedPw,
         name: name,
       });
@@ -40,7 +68,11 @@ exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   let loadeduser;
-  User.findOne({ email: email })
+  User.findOne({
+    where: {
+      email: email,
+    },
+  })
     .then((user) => {
       if (!user) {
         const error = new Error("A user with this email could not be found.");
@@ -72,4 +104,27 @@ exports.login = (req, res, next) => {
       }
       next(err);
     });
+};
+
+exports.verifyEmail = async (req, res, next) => {
+  try {
+    const user = await User.finOne({ emailToken: req.query.token });
+    if (!user) {
+      const error = new Error(
+        "Token is invalid. Please contact us for assistance"
+      );
+      error.statusCode = 401;
+      throw error;
+    }
+    user.emailToken = null;
+    user.isVerified = true;
+    await user.save().then((result) => {
+      res.status(200).json(`User with Id ${result.id} was verified`);
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
 };
