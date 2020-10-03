@@ -82,11 +82,16 @@ exports.login = (req, res, next) => {
         {
           email: loadeduser.email,
           userId: loadeduser.id.toString(),
+          role: loadeduser.role,
         },
         "dbapasmwij",
         { expiresIn: "1h" }
       );
-      res.status(200).json({ token: token, userId: loadeduser.id.toString() });
+      res.status(200).json({
+        token: token,
+        userId: loadeduser.id.toString(),
+        role: loadeduser.role,
+      });
     })
     .catch((error) => {
       if (!error.statusCode) {
@@ -118,7 +123,7 @@ exports.verifyEmail = async (req, res, next) => {
   }
 };
 
-const sendVerificationEmail = async (emailToken, email, host, callback) => {
+const sendVerificationEmail = async (emailToken, email, host) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

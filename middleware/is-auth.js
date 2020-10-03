@@ -1,3 +1,4 @@
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 
@@ -17,7 +18,17 @@ module.exports = async (req, res, next) => {
     if (!decodedToken) {
       throw createError(401, "Not authenticated.");
     }
-    req.userId = decodedToken.userId;
+
+    await User.findOne({
+      where: {
+        id: decodedToken.userId,
+      },
+    })
+      .then((user) => {
+        const { id, role, email } = user;
+        req.user = { id, role, email };
+      })
+      .catch((error) => next(createError(401, error)));
     return next();
   } catch (error) {
     next(error);

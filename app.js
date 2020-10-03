@@ -20,7 +20,6 @@ sequlize
   .catch((err) => console.log(err));
 
 app.use(bodyParser.json()); // aplication/json
-
 app.use(cors());
 app.options("*", cors());
 
