@@ -6,6 +6,9 @@ const sequelize = new Sequelize("reservation", "root", "", {
   dialectOptions: {
     timezone: "Etc/GMT+2",
   },
+  define: {
+    freezeTableName: true,
+  },
 });
 
 module.exports = sequelize;

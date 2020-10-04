@@ -1,25 +1,25 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Schedule = sequelize.define("Schedules", {
+const ServiceBooked = sequelize.define("services_booked", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  employee_id: {
+  appointment_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  from: {
-    type: DataTypes.DATE,
+  service_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  to: {
-    type: DataTypes.DATE,
+  price: {
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
 });
 
-module.exports = Schedule;
+module.exports = ServiceBooked;
