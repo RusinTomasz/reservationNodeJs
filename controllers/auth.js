@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const createError = require("http-errors");
 const User = require("../models/user");
+const Client = require("../models/client");
 const nodemailer = require("nodemailer");
 
 exports.signup = async (req, res, next) => {
