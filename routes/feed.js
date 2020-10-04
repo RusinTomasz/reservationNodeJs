@@ -1,5 +1,6 @@
 const express = require("express");
 const { authRole } = require("../middleware/role-auth.js");
+const { test } = require("../middleware/test.js");
 
 const feedController = require("../controllers/feed");
 const isAuth = require("../middleware/is-auth");

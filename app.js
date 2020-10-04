@@ -13,9 +13,10 @@ const app = express();
 // app.use(bodyParser.urlencoded());
 
 sequlize
-  .sync()
+  // .sync()
+  .sync({ force: true })
   .then((results) => {
-    console.log(results);
+    // console.log(results);
   })
   .catch((err) => console.log(err));
 

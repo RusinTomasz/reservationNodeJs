@@ -25,6 +25,9 @@ module.exports = async (req, res, next) => {
       },
     })
       .then((user) => {
+        if (!user) {
+          next(createError(401, "User not found"));
+        }
         const { id, role, email } = user;
         req.user = { id, role, email };
       })
