@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
+
 const sequelize = require("../util/database");
 
-const Appointment = sequelize.define("Appointments", {
+const Appointment = sequelize.define("appointments", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -11,17 +12,6 @@ const Appointment = sequelize.define("Appointments", {
   date_created: {
     type: DataTypes.DATE,
     allowNull: false,
-  },
-  employee_created: {
-    type: DataTypes.INTEGER,
-  },
-  client_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  employee_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
   },
   client_name: {
     type: DataTypes.STRING,

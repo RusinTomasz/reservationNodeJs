@@ -5,6 +5,36 @@ const bodyParser = require("body-parser");
 
 const sequlize = require("./util/database");
 
+/////////database tables
+const Client = require("./models/client");
+const Appointment = require("./models/appointment");
+const ServiceBooked = require("./models/service-booked");
+const ServiceProvided = require("./models/service-provided");
+const Service = require("./models/service");
+const Schedule = require("./models/schedule");
+const Employee = require("./models/employee");
+
+Client.hasMany(Appointment);
+Appointment.belongsTo(Client);
+
+Service.hasMany(ServiceBooked);
+ServiceBooked.belongsTo(Service);
+Service.hasMany(ServiceProvided);
+ServiceProvided.belongsTo(Service);
+
+Appointment.hasMany(ServiceProvided);
+ServiceProvided.belongsTo(Appointment);
+Appointment.hasMany(ServiceBooked);
+ServiceBooked.belongsTo(Appointment);
+
+Employee.hasMany(Schedule);
+Schedule.belongsTo(Employee);
+
+Employee.hasMany(Appointment);
+Appointment.belongsTo(Employee);
+
+//////////////////////////
+
 const feedRoutes = require("./routes/feed");
 const authRoutes = require("./routes/auth");
 
