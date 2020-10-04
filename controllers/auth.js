@@ -11,6 +11,7 @@ const Schedule = require("../models/schedule");
 const Employee = require("../models/employee");
 const Appointment = require("../models/appointment");
 const Client = require("../models/client");
+const ServiceProvided = require("../models/service-provided");
 const nodemailer = require("nodemailer");
 
 exports.signup = async (req, res, next) => {
