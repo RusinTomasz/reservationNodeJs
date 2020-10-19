@@ -34,4 +34,7 @@ router.post("/login", isNotVerified, authController.login);
 
 router.get("/verify-email", authController.verifyEmail);
 
+router.put("/forgot-password", authController.forgotPassword);
+router.put("/reset-password", authController.resetPassword);
+
 module.exports = router;

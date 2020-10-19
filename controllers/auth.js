@@ -122,6 +122,109 @@ exports.verifyEmail = async (req, res, next) => {
   }
 };
 
+exports.forgotPassword = (req, res, next) => {
+  const email = req.body.email;
+  const resetPasswordToken = crypto.randomBytes(64).toString("hex");
+
+  User.findOne({
+    where: {
+      email: email,
+    },
+  })
+    .then((user) => {
+      if (!user) {
+        throw createError(401, "A user with this email could not be found.");
+      }
+      user.resetPasswordToken = resetPasswordToken;
+      user.save();
+      return user;
+    })
+    .then(async (user) => {
+      const isEmailSend = await sendResetPasswordEmail(
+        resetPasswordToken,
+        email,
+        req.headers.host
+      );
+      res
+        .status(200)
+        .json(
+          `Email with resset password link was sent to user with Id ${user.id}`
+        );
+    })
+    .catch((error) => {
+      if (error.removeUserPasswordToken === true) {
+        user.resetPasswordToken = null;
+        user.save();
+        next(error);
+      } else {
+        next(error);
+      }
+    });
+};
+
+exports.resetPassword = async (req, res, next) => {
+  const resetPasswordToken = req.query.resetPassToken;
+  const newPass = req.body.newPass;
+  if (resetPasswordToken) {
+    try {
+      const user = await User.findOne({
+        where: {
+          resetPasswordToken: resetPasswordToken,
+        },
+      })
+        .then((user) => {
+          if (!user) {
+            throw createError(
+              401,
+              "Reset token is invalid. Please contact us for assistance"
+            );
+          }
+          return user;
+        })
+        .then((user) => {
+          bcrypt
+            .hash(newPass, 12)
+            .then(async (hashedNewPass) => {
+              user.password = hashedNewPass;
+              user.resetPasswordToken = null;
+              await user
+                .save()
+                .then((result) => {
+                  res
+                    .status(200)
+                    .json(`Password for user Id ${result.id} has been change`);
+                })
+                .catch((error) => next(error));
+            })
+            .catch((error) => {
+              if (!error.statusCode) {
+                error.statusCode = 500;
+              }
+              next(error);
+            });
+        })
+        .catch((error) => {
+          if (!error.statusCode) {
+            error.statusCode = 500;
+          }
+          next(error);
+        });
+    } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 500;
+      }
+      next(error);
+    }
+  } else {
+    next(
+      createError(
+        401,
+        "Authentication error. No reset password token available"
+      )
+    );
+  }
+};
+
 const sendVerificationEmail = async (emailToken, email, host) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -152,6 +255,43 @@ const sendVerificationEmail = async (emailToken, email, host) => {
     transporter.sendMail(msg, (err, info) => {
       if (err) {
         reject(createError(422, err, { removeUser: true }));
+      } else {
+        resolve(true);
+      }
+    });
+  });
+};
+
+const sendResetPasswordEmail = async (resetPasswordToken, email, host) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  const msg = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Resset your password",
+    text: `
+      Hello,
+      Please copy and paste the addres below to reset your password.
+      http://${host}/auth/reset-password?token=${resetPasswordToken}
+    `,
+    html: `
+      <h1>Hello,</h1>
+      <p>thanks for registering on our site.</p>
+      <p>Please click the link below to reset your password.</p>
+      <a href="http://${host}/auth/reset-password?token=${resetPasswordToken}">Reset your password</a>
+    `,
+  };
+
+  return new Promise(function (resolve, reject) {
+    transporter.sendMail(msg, (err, info) => {
+      if (err) {
+        reject(createError(422, err, { removeUserPasswordToken: true }));
       } else {
         resolve(true);
       }
