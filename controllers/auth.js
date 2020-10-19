@@ -102,7 +102,7 @@ exports.login = (req, res, next) => {
 
 exports.verifyEmail = async (req, res, next) => {
   try {
-    const user = await User.findOne({ emailToken: req.query.token });
+    const user = await User.findOne({ where: { emailToken: req.query.token } });
     if (!user) {
       throw createError(
         401,
@@ -241,7 +241,7 @@ const sendVerificationEmail = async (emailToken, email, host) => {
     text: `
       Hello, thanks for registering on our site.
       Please copy and paste the addres below to verify yor account.
-      http://${host}/auth/verify-email?token=${emailToken}
+      http://${process.env.CLIENT_URL}/mail-verify?token=${emailToken}
     `,
     // html: `
     //   <h1>Hello,</h1>
@@ -251,7 +251,7 @@ const sendVerificationEmail = async (emailToken, email, host) => {
     // `,
 
     html: mailVerifyHtmlTemplate(
-      `http://bookingapp/verify-email?token=${emailToken}`
+      `${process.env.CLIENT_URL}/mail-verify?token=${emailToken}`
     ),
   };
 
