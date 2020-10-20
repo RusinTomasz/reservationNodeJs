@@ -3,16 +3,16 @@ const cors = require("cors");
 const createError = require("http-errors");
 const bodyParser = require("body-parser");
 
-const sequlize = require("./util/database");
+const sequlize = require("./src/util/database");
 
 /////////database tables
-const Client = require("./models/client");
-const Appointment = require("./models/appointment");
-const ServiceBooked = require("./models/service-booked");
-const ServiceProvided = require("./models/service-provided");
-const Service = require("./models/service");
-const Schedule = require("./models/schedule");
-const Employee = require("./models/employee");
+const Client = require("./src/models/client");
+const Appointment = require("./src/models/appointment");
+const ServiceBooked = require("./src/models/service-booked");
+const ServiceProvided = require("./src/models/service-provided");
+const Service = require("./src/models/service");
+const Schedule = require("./src/models/schedule");
+const Employee = require("./src/models/employee");
 
 Client.hasMany(Appointment);
 Appointment.belongsTo(Client);
@@ -35,8 +35,8 @@ Appointment.belongsTo(Employee);
 
 //////////////////////////
 
-const feedRoutes = require("./routes/feed");
-const authRoutes = require("./routes/auth");
+const feedRoutes = require("./src/api/feed");
+const authRoutes = require("./src/api/auth");
 
 const app = express();
 
