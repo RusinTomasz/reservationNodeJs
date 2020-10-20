@@ -3,9 +3,11 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const createError = require("http-errors");
+const jwt = require("jsonwebtoken");
 
 class UserService {
   constructor() {}
+
   signUp = async (email, name, password) => {
     const emailToken = crypto.randomBytes(64).toString("hex");
     const isVerified = false;
@@ -36,6 +38,49 @@ class UserService {
         }
       });
     return createdUserName;
+  };
+
+  login = async (email, password) => {
+    let loadeduser;
+    const user = User.findOne({
+      where: {
+        email: email,
+      },
+    })
+      .then((user) => {
+        if (!user) {
+          throw createError(401, "A user with this email could not be found.");
+        }
+        loadeduser = user;
+        return bcrypt.compare(password, user.password);
+      })
+      .then((isEqual) => {
+        if (!isEqual) {
+          throw createError(401, "Wrong password!");
+        }
+        const token = jwt.sign(
+          {
+            email: loadeduser.email,
+            userId: loadeduser.id.toString(),
+            role: loadeduser.role,
+          },
+          "dbapasmwij",
+          { expiresIn: "1h" }
+        );
+        const user = {
+          token: token,
+          userId: loadeduser.id.toString(),
+          role: loadeduser.role,
+        };
+        return user;
+      })
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return new Error(error);
+      });
+    return user;
   };
 
   sendVerificationEmail = async (emailToken, email) => {

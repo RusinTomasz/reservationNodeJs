@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+
 const crypto = require("crypto");
 const createError = require("http-errors");
 const User = require("../models/user");
@@ -35,47 +35,23 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-exports.login = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  let loadeduser;
-  User.findOne({
-    where: {
-      email: email,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        throw createError(401, "A user with this email could not be found.");
-      }
-      loadeduser = user;
-      return bcrypt.compare(password, user.password);
-    })
-    .then((isEqual) => {
-      if (!isEqual) {
-        throw createError(401, "Wrong password!");
-      }
-      const token = jwt.sign(
-        {
-          email: loadeduser.email,
-          userId: loadeduser.id.toString(),
-          role: loadeduser.role,
-        },
-        "dbapasmwij",
-        { expiresIn: "1h" }
-      );
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const authServiceInstance = new UserService();
+    const user = await authServiceInstance.login(email, password);
+    if (user instanceof Error) {
+      throw createError(401, user);
+    } else {
       res.status(200).json({
-        token: token,
-        userId: loadeduser.id.toString(),
-        role: loadeduser.role,
+        token: user.token,
+        userId: user.userId,
+        role: user.role,
       });
-    })
-    .catch((error) => {
-      if (!error.statusCode) {
-        error.statusCode = 500;
-      }
-      next(error);
-    });
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.verifyEmail = async (req, res, next) => {
