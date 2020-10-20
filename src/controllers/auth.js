@@ -1,12 +1,8 @@
 require("dotenv").config();
 
 const { validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-
-const createError = require("http-errors");
-const User = require("../models/user");
-
 const { UserService } = require("../services/userService");
+const createError = require("http-errors");
 
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
