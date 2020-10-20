@@ -32,9 +32,9 @@ class UserService {
       .catch((error) => {
         if (error.removeUser === true) {
           user.destroy();
-          return new Error(error);
+          return error;
         } else {
-          return new Error(error);
+          return error;
         }
       });
     return createdUserName;
@@ -78,9 +78,37 @@ class UserService {
         if (!error.statusCode) {
           error.statusCode = 500;
         }
-        return new Error(error);
+        return error;
       });
     return user;
+  };
+
+  verifyEmail = async (token) => {
+    const verifiedUser = await User.findOne({
+      where: { emailToken: token },
+    })
+      .then(async (user) => {
+        if (!user) {
+          throw createError(
+            401,
+            "Token is invalid. Please contact us for assistance"
+          );
+        }
+        user.emailToken = null;
+        user.isVerified = true;
+
+        const verifiedUser = await user.save().then((result) => {
+          return result.id;
+        });
+        return verifiedUser;
+      })
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return verifiedUser;
   };
 
   sendVerificationEmail = async (emailToken, email) => {

@@ -56,18 +56,14 @@ exports.login = async (req, res, next) => {
 
 exports.verifyEmail = async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { emailToken: req.query.token } });
-    if (!user) {
-      throw createError(
-        401,
-        "Token is invalid. Please contact us for assistance"
-      );
+    const token = req.query.token;
+    const authServiceInstance = new UserService();
+    const verifiedUser = await authServiceInstance.verifyEmail(token);
+    if (verifiedUser instanceof Error) {
+      throw createError(401, verifiedUser);
+    } else {
+      res.status(200).json(`User with Id ${verifiedUser} was verified`);
     }
-    user.emailToken = null;
-    user.isVerified = true;
-    await user.save().then((result) => {
-      res.status(200).json(`User with Id ${result.id} was verified`);
-    });
   } catch (error) {
     if (!error.statusCode) {
       error.statusCode = 500;
