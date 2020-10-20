@@ -147,6 +147,52 @@ class UserService {
     return userWithForgottenPass;
   };
 
+  resetPassword = async (resetPassToken, newPass) => {
+    const userWhosePassIsToBeReset = await User.findOne({
+      where: {
+        resetPasswordToken: resetPassToken,
+      },
+    })
+      .then((user) => {
+        if (!user) {
+          throw createError(
+            401,
+            "Reset token is invalid. Please contact us for assistance"
+          );
+        }
+        return user;
+      })
+      .then(async (user) => {
+        const userWhosePassIsToBeReset = await bcrypt
+          .hash(newPass, 12)
+          .then(async (hashedNewPass) => {
+            user.password = hashedNewPass;
+            user.resetPasswordToken = null;
+            const userWhosePassIsToBeReset = await user
+              .save()
+              .then((result) => {
+                return result.id;
+              })
+              .catch((error) => error);
+            return userWhosePassIsToBeReset;
+          })
+          .catch((error) => {
+            if (!error.statusCode) {
+              error.statusCode = 500;
+            }
+            return error;
+          });
+        return userWhosePassIsToBeReset;
+      })
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return userWhosePassIsToBeReset;
+  };
+
   sendVerificationEmail = async (emailToken, email) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",

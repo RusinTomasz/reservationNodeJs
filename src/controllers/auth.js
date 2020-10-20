@@ -95,52 +95,24 @@ exports.forgotPassword = async (req, res, next) => {
 };
 
 exports.resetPassword = async (req, res, next) => {
-  const resetPasswordToken = req.query.resetPassToken;
-  const newPass = req.body.newPass;
-  if (resetPasswordToken) {
+  const { resetPassToken } = req.query;
+  const { newPass } = req.body;
+  if (resetPassToken) {
     try {
-      const user = await User.findOne({
-        where: {
-          resetPasswordToken: resetPasswordToken,
-        },
-      })
-        .then((user) => {
-          if (!user) {
-            throw createError(
-              401,
-              "Reset token is invalid. Please contact us for assistance"
-            );
-          }
-          return user;
-        })
-        .then((user) => {
-          bcrypt
-            .hash(newPass, 12)
-            .then(async (hashedNewPass) => {
-              user.password = hashedNewPass;
-              user.resetPasswordToken = null;
-              await user
-                .save()
-                .then((result) => {
-                  res
-                    .status(200)
-                    .json(`Password for user Id ${result.id} has been change`);
-                })
-                .catch((error) => next(error));
-            })
-            .catch((error) => {
-              if (!error.statusCode) {
-                error.statusCode = 500;
-              }
-              next(error);
-            });
-        })
-        .catch((error) => {
-          if (!error.statusCode) {
-            error.statusCode = 500;
-          }
-          next(error);
-        });
+      const authServiceInstance = new UserService();
+      const userWhosePassIsToBeReset = await authServiceInstance.resetPassword(
+        resetPassToken,
+        newPass
+      );
+      if (userWhosePassIsToBeReset instanceof Error) {
+        throw createError(401, userWhosePassIsToBeReset);
+      } else {
+        res
+          .status(200)
+          .json(
+            `Password for user Id ${userWhosePassIsToBeReset} has been change`
+          );
+      }
     } catch (error) {
       if (!error.statusCode) {
         error.statusCode = 500;
