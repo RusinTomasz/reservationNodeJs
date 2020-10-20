@@ -111,6 +111,42 @@ class UserService {
     return verifiedUser;
   };
 
+  forgotPassword = async (email) => {
+    const resetPasswordToken = crypto.randomBytes(64).toString("hex");
+    const userWithForgottenPass = await User.findOne({
+      where: {
+        email: email,
+      },
+    })
+      .then((user) => {
+        if (!user) {
+          throw createError(401, "A user with this email could not be found.");
+        }
+        user.resetPasswordToken = resetPasswordToken;
+        user.save();
+        return user;
+      })
+      .then(async (user) => {
+        const isEmailSend = await this.sendResetPasswordEmail(
+          resetPasswordToken,
+          email
+        );
+
+        return user.id;
+      })
+      .catch((error) => {
+        if (error.removeUserPasswordToken === true) {
+          user.resetPasswordToken = null;
+          user.save();
+          return error;
+        } else {
+          return error;
+        }
+      });
+
+    return userWithForgottenPass;
+  };
+
   sendVerificationEmail = async (emailToken, email) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -138,6 +174,43 @@ class UserService {
       transporter.sendMail(msg, (err, info) => {
         if (err) {
           reject(createError(422, err, { removeUser: true }));
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  };
+
+  sendResetPasswordEmail = async (resetPasswordToken, email) => {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    const msg = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Resset your password",
+      text: `
+        Hello,
+        Please copy and paste the addres below to reset your password.
+        http://${process.env.CLIENT_URL}/auth/reset-password?token=${resetPasswordToken}
+      `,
+      html: `
+        <h1>Hello,</h1>
+        <p>thanks for registering on our site.</p>
+        <p>Please click the link below to reset your password.</p>
+        <a href="http://${process.env.CLIENT_URL}/auth/reset-password?token=${resetPasswordToken}">Reset your password</a>
+      `,
+    };
+
+    return new Promise(function (resolve, reject) {
+      transporter.sendMail(msg, (err, info) => {
+        if (err) {
+          reject(createError(422, err, { removeUserPasswordToken: true }));
         } else {
           resolve(true);
         }

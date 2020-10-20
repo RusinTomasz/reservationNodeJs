@@ -3,10 +3,8 @@ require("dotenv").config();
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 
-const crypto = require("crypto");
 const createError = require("http-errors");
 const User = require("../models/user");
-const nodemailer = require("nodemailer");
 
 const { UserService } = require("../services/userService");
 
@@ -72,44 +70,28 @@ exports.verifyEmail = async (req, res, next) => {
   }
 };
 
-exports.forgotPassword = (req, res, next) => {
-  const email = req.body.email;
-  const resetPasswordToken = crypto.randomBytes(64).toString("hex");
-
-  User.findOne({
-    where: {
-      email: email,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        throw createError(401, "A user with this email could not be found.");
-      }
-      user.resetPasswordToken = resetPasswordToken;
-      user.save();
-      return user;
-    })
-    .then(async (user) => {
-      const isEmailSend = await sendResetPasswordEmail(
-        resetPasswordToken,
-        email,
-        req.headers.host
-      );
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const authServiceInstance = new UserService();
+    const userWithForgottenPass = await authServiceInstance.forgotPassword(
+      email
+    );
+    if (userWithForgottenPass instanceof Error) {
+      throw createError(401, userWithForgottenPass);
+    } else {
       res
         .status(200)
         .json(
-          `Email with resset password link was sent to user with Id ${user.id}`
+          `Email with resset password link was sent to user with Id ${userWithForgottenPass}`
         );
-    })
-    .catch((error) => {
-      if (error.removeUserPasswordToken === true) {
-        user.resetPasswordToken = null;
-        user.save();
-        next(error);
-      } else {
-        next(error);
-      }
-    });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
 };
 
 exports.resetPassword = async (req, res, next) => {
@@ -173,41 +155,4 @@ exports.resetPassword = async (req, res, next) => {
       )
     );
   }
-};
-
-const sendResetPasswordEmail = async (resetPasswordToken, email, host) => {
-  let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
-    },
-  });
-
-  const msg = {
-    from: process.env.EMAIL,
-    to: email,
-    subject: "Resset your password",
-    text: `
-      Hello,
-      Please copy and paste the addres below to reset your password.
-      http://${host}/auth/reset-password?token=${resetPasswordToken}
-    `,
-    html: `
-      <h1>Hello,</h1>
-      <p>thanks for registering on our site.</p>
-      <p>Please click the link below to reset your password.</p>
-      <a href="http://${host}/auth/reset-password?token=${resetPasswordToken}">Reset your password</a>
-    `,
-  };
-
-  return new Promise(function (resolve, reject) {
-    transporter.sendMail(msg, (err, info) => {
-      if (err) {
-        reject(createError(422, err, { removeUserPasswordToken: true }));
-      } else {
-        resolve(true);
-      }
-    });
-  });
 };
