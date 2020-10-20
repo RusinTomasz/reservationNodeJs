@@ -17,6 +17,6 @@ exports.signUpValidator = [
       });
     })
     .normalizeEmail(),
-  body("password").trim().isLength({ min: 1 }),
+  body("password").trim().isLength({ min: 6 }),
   body("name").trim().not().isEmpty(),
 ];
