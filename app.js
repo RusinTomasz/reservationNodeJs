@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const createError = require("http-errors");
 const bodyParser = require("body-parser");
-
+const logger = require("./src/config/logger");
 const sequlize = require("./src/util/database");
 
 /////////database tables
@@ -54,6 +54,15 @@ app.use(bodyParser.json()); // aplication/json
 app.use(cors());
 app.options("*", cors());
 
+app.use((req, res, next) => {
+  logger.info(req.body);
+  let oldSend = res.send;
+  res.send = function (data) {
+    logger.info(JSON.parse(data));
+    oldSend.apply(res, arguments);
+  };
+  next();
+});
 app.use("/feed", feedRoutes);
 app.use("/auth", authRoutes);
 
@@ -64,7 +73,6 @@ app.use((req, res, next) => {
 
 //Error handler
 app.use((error, req, res, next) => {
-  console.log(error);
   res.status(error.status || 500);
   res.send({
     error: {
@@ -74,4 +82,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(8080);
+app.listen(8080, () => {
+  logger.log("info", "server up and running on PORT : 8080");
+});

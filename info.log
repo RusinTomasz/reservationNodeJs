@@ -1,0 +1,9 @@
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:02:38.038Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:10:12.368Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:10:23.433Z"}
+{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydXNpbkBhZHNvbHV0aW9ucy5wbCIsInVzZXJJZCI6IjcyIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTYwMzI2MDYyOSwiZXhwIjoxNjAzMjY0MjI5fQ.G433XcavHaPnWEVKSLM8i2sIf98rY9c2u_t7mm4Enxo","userId":"72","role":"client"},"level":"info","timestamp":"2020-10-21T06:10:29.276Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:12:06.392Z"}
+{"message":{"email":"trusin@adsolutions.pl","password":"tomasz1234"},"level":"info","timestamp":"2020-10-21T06:12:09.820Z"}
+{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydXNpbkBhZHNvbHV0aW9ucy5wbCIsInVzZXJJZCI6IjcyIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTYwMzI2MDczMCwiZXhwIjoxNjAzMjY0MzMwfQ.hQ6T5K9bSRSocNxvaAh0WXCD5O1vCvhs-zsdEMziAnM","userId":"72","role":"client"},"level":"info","timestamp":"2020-10-21T06:12:10.106Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:12:57.431Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:13:08.530Z"}
