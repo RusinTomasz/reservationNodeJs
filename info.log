@@ -7,3 +7,20 @@
 {"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydXNpbkBhZHNvbHV0aW9ucy5wbCIsInVzZXJJZCI6IjcyIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTYwMzI2MDczMCwiZXhwIjoxNjAzMjY0MzMwfQ.hQ6T5K9bSRSocNxvaAh0WXCD5O1vCvhs-zsdEMziAnM","userId":"72","role":"client"},"level":"info","timestamp":"2020-10-21T06:12:10.106Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:12:57.431Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:13:08.530Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T11:52:03.540Z"}
+{"message":{"name":"Andrzej","email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:53:47.462Z"}
+{"message":"User created!","createdUserName":"Andrzej","level":"info","timestamp":"2020-10-21T11:53:49.803Z"}
+{"message":{"email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:55:10.138Z"}
+{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvb2thbmRyemVqQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE2MDMyODEzMTAsImV4cCI6MTYwMzI4NDkxMH0.2W9thw1qUFPTongmpFKxz4C-K3PokexfKrxElNOYoR8","userId":"6","role":"employee"},"level":"info","timestamp":"2020-10-21T11:55:10.483Z"}
+{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T11:58:37.332Z"}
+{"message":{"email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:59:39.277Z"}
+{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvb2thbmRyemVqQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE2MDMyODE1NzksImV4cCI6MTYwMzI4NTE3OX0.G1mXBJLmhQicvw_-b25wisM6arCtCCUmjmPiv1AboTI","userId":"6","role":"employee"},"level":"info","timestamp":"2020-10-21T11:59:39.647Z"}
+{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T11:59:49.412Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T12:03:37.066Z"}
+{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T12:03:39.950Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T12:03:51.305Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T09:30:32.625Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T09:30:34.677Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T09:45:39.156Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T15:18:46.901Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T15:18:57.336Z"}

@@ -8,10 +8,6 @@ const Schedule = sequelize.define("schedules", {
     primaryKey: true,
     autoIncrement: true,
   },
-  employee_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   from: {
     type: DataTypes.DATE,
     allowNull: false,
