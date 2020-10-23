@@ -35,7 +35,7 @@ Appointment.belongsTo(Employee);
 
 //////////////////////////
 
-const feedRoutes = require("./src/api/feed");
+const servicesRoutes = require("./src/api/services");
 const authRoutes = require("./src/api/auth");
 
 const app = express();
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
   // };
   next();
 });
-app.use("/feed", feedRoutes);
+app.use("/", servicesRoutes);
 app.use("/auth", authRoutes);
 
 //404 handler and pass to error handler

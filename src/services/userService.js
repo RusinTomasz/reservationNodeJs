@@ -113,6 +113,7 @@ class UserService {
 
   forgotPassword = async (email) => {
     const resetPasswordToken = crypto.randomBytes(64).toString("hex");
+
     const userWithForgottenPass = await User.findOne({
       where: {
         email: email,

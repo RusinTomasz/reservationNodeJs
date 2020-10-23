@@ -20,3 +20,8 @@ exports.signUpValidator = [
   body("password").trim().isLength({ min: 6 }),
   body("name").trim().not().isEmpty(),
 ];
+
+exports.createServiceValidator = [
+  body("duration").isNumeric(),
+  body("price").isDecimal(),
+];
