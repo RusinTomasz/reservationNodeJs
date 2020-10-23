@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Client = require("../models/client");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
@@ -14,15 +15,24 @@ class UserService {
     let user;
     const createdUserName = await bcrypt
       .hash(password, 12)
-      .then((hashedPw) => {
-        user = new User({
-          email: email,
-          emailToken: emailToken,
-          isVerified: isVerified,
-          password: hashedPw,
-          name: name,
-        });
-        user.save();
+      .then(async (hashedPw) => {
+        user = await User.create(
+          {
+            email: email,
+            emailToken: emailToken,
+            isVerified: isVerified,
+            password: hashedPw,
+            name: name,
+            client: {
+              client_name: name,
+              contact_mobile: "555555555",
+              contact_mail: email,
+            },
+          },
+          {
+            include: [Client],
+          }
+        );
         return name;
       })
       .then(async (result) => {
