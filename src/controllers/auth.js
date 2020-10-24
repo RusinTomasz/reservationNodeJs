@@ -10,12 +10,13 @@ exports.signup = async (req, res, next) => {
     if (!errors.isEmpty()) {
       throw createError(422, errors.errors[0].msg);
     }
-    const { email, name, password } = req.body;
+    const { email, name, password, phoneNumber } = req.body;
     const authServiceInstance = new UserService();
     const createdUserName = await authServiceInstance.signUp(
       email,
       name,
-      password
+      password,
+      phoneNumber
     );
     if (createdUserName instanceof Error) {
       throw createError(422, createdUserName);

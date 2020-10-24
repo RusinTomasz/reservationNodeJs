@@ -50,8 +50,8 @@ const app = express();
 // app.use(bodyParser.urlencoded());
 
 sequlize
-  // .sync()
-  .sync({ force: true })
+  .sync()
+  // .sync({ force: true })
   .then((results) => {
     // console.log(results);
   })

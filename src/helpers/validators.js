@@ -19,6 +19,7 @@ exports.signUpValidator = [
     .normalizeEmail(),
   body("password").trim().isLength({ min: 6 }),
   body("name").trim().not().isEmpty(),
+  body("phoneNumber").trim().not().isEmpty(),
 ];
 
 exports.createServiceValidator = [
