@@ -1,23 +1,3 @@
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:02:38.038Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:10:12.368Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:10:23.433Z"}
-{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydXNpbkBhZHNvbHV0aW9ucy5wbCIsInVzZXJJZCI6IjcyIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTYwMzI2MDYyOSwiZXhwIjoxNjAzMjY0MjI5fQ.G433XcavHaPnWEVKSLM8i2sIf98rY9c2u_t7mm4Enxo","userId":"72","role":"client"},"level":"info","timestamp":"2020-10-21T06:10:29.276Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:12:06.392Z"}
-{"message":{"email":"trusin@adsolutions.pl","password":"tomasz1234"},"level":"info","timestamp":"2020-10-21T06:12:09.820Z"}
-{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydXNpbkBhZHNvbHV0aW9ucy5wbCIsInVzZXJJZCI6IjcyIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTYwMzI2MDczMCwiZXhwIjoxNjAzMjY0MzMwfQ.hQ6T5K9bSRSocNxvaAh0WXCD5O1vCvhs-zsdEMziAnM","userId":"72","role":"client"},"level":"info","timestamp":"2020-10-21T06:12:10.106Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:12:57.431Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T06:13:08.530Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T11:52:03.540Z"}
-{"message":{"name":"Andrzej","email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:53:47.462Z"}
-{"message":"User created!","createdUserName":"Andrzej","level":"info","timestamp":"2020-10-21T11:53:49.803Z"}
-{"message":{"email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:55:10.138Z"}
-{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvb2thbmRyemVqQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE2MDMyODEzMTAsImV4cCI6MTYwMzI4NDkxMH0.2W9thw1qUFPTongmpFKxz4C-K3PokexfKrxElNOYoR8","userId":"6","role":"employee"},"level":"info","timestamp":"2020-10-21T11:55:10.483Z"}
-{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T11:58:37.332Z"}
-{"message":{"email":"bookandrzej@gmail.com","password":"andrzej123"},"level":"info","timestamp":"2020-10-21T11:59:39.277Z"}
-{"message":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvb2thbmRyemVqQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE2MDMyODE1NzksImV4cCI6MTYwMzI4NTE3OX0.G1mXBJLmhQicvw_-b25wisM6arCtCCUmjmPiv1AboTI","userId":"6","role":"employee"},"level":"info","timestamp":"2020-10-21T11:59:39.647Z"}
-{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T11:59:49.412Z"}
-{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T12:03:37.066Z"}
-{"message":{"email":"bookandrzej@gmail.com","password":"andrzej1234"},"level":"info","timestamp":"2020-10-21T12:03:39.950Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-21T12:03:51.305Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T09:30:32.625Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-22T09:30:34.677Z"}
@@ -284,3 +264,112 @@
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T11:00:11.798Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T11:00:26.885Z"}
 {"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T11:00:27.968Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T11:00:30.970Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:23:16.373Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:24:21.874Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:28:09.114Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:28:12.717Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:30:48.375Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:31:11.489Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:32:14.094Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:32:19.974Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:35:11.582Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:35:30.767Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:48:48.827Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:51:38.731Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:52:09.186Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:52:41.675Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:53:05.027Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:53:25.922Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:53:34.087Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:54:30.175Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:54:57.579Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:55:00.235Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:55:09.851Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:55:50.213Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:56:00.319Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:56:05.716Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:56:06.497Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:56:25.591Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:57:08.721Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:57:18.664Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:57:28.711Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:57:33.048Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T12:57:43.411Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:02:17.065Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:02:36.073Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:02:59.664Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:03:02.451Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:03:38.903Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:04:00.317Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:08:47.485Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:09:59.587Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:10:09.194Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:10:41.938Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:10:59.525Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:11:54.580Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:13:32.305Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:15:46.878Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:16:36.450Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:16:39.321Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:16:57.017Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:17:16.612Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:17:22.091Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:17:53.950Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:17:56.473Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:19:47.432Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:19:51.440Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:20:01.003Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:22:04.720Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:22:25.224Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:23:09.422Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:23:22.457Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:26:02.872Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:26:29.787Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:26:54.442Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:27:57.734Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:28:54.820Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:29:00.871Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:29:13.649Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:30:43.210Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:30:51.435Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:31:21.816Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:31:40.705Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:32:28.644Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:33:32.344Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:34:24.613Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:34:43.104Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:34:46.722Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:34:52.718Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:34:54.850Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:36:01.710Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:36:09.406Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:36:12.999Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:36:29.410Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:37:25.366Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:37:41.030Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:37:59.879Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:38:20.344Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:38:48.170Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:38:50.977Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:40:33.994Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:44:03.095Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:44:41.725Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:44:53.112Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:45:06.934Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:45:10.844Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:45:25.248Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:45:38.906Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:46:24.069Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:46:35.354Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:47:01.113Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:48:16.919Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:55:05.443Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:55:31.472Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:56:09.642Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:56:21.636Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:56:57.733Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:57:09.591Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:57:31.562Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:58:36.447Z"}
+{"level":"info","message":"server up and running on PORT : 8080","timestamp":"2020-10-26T13:58:56.872Z"}

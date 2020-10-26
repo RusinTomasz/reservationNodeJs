@@ -8,10 +8,28 @@ exports.createAppointment = async (req, res, next) => {
     if (!errors.isEmpty()) {
       throw createError(422, errors.errors[0].msg);
     }
-    const {} = req.body;
+    const {
+      dateCreated,
+      clientName,
+      clientContact,
+      startTime,
+      endTimeExpected,
+      priceExpected,
+      clientId,
+      employeeId,
+    } = req.body;
     const appointmentServiceInstance = new AppointmentService();
 
-    const createdAppointment = await appointmentServiceInstance.createAppointment();
+    const createdAppointment = await appointmentServiceInstance.createAppointment(
+      dateCreated,
+      clientName,
+      clientContact,
+      startTime,
+      endTimeExpected,
+      priceExpected,
+      clientId,
+      employeeId
+    );
     if (createdAppointment instanceof Error) {
       throw createError(createdAppointment.statusCode, createdAppointment);
     } else {
