@@ -41,6 +41,7 @@ Appointment.belongsTo(Employee);
 
 //////////////////////////
 
+const employeeRoutes = require("./src/api/employee");
 const servicesRoutes = require("./src/api/services");
 const scheduleRoutes = require("./src/api/schedule");
 const authRoutes = require("./src/api/auth");
@@ -50,8 +51,8 @@ const app = express();
 // app.use(bodyParser.urlencoded());
 
 sequlize
-  // .sync()
-  .sync({ force: true })
+  .sync()
+  // .sync({ force: true })
   .then((results) => {
     // console.log(results);
   })
@@ -70,6 +71,7 @@ app.use((req, res, next) => {
   // };
   next();
 });
+app.use("/", employeeRoutes);
 app.use("/", servicesRoutes);
 app.use("/", scheduleRoutes);
 app.use("/auth", authRoutes);
