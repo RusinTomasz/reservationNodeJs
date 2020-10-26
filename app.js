@@ -41,6 +41,8 @@ Appointment.belongsTo(Employee);
 
 //////////////////////////
 
+const appointmentRoutes = require("./src/api/appointment");
+const employeeRoutes = require("./src/api/employee");
 const servicesRoutes = require("./src/api/services");
 const scheduleRoutes = require("./src/api/schedule");
 const authRoutes = require("./src/api/auth");
@@ -70,6 +72,9 @@ app.use((req, res, next) => {
   // };
   next();
 });
+
+app.use("/", appointmentRoutes);
+app.use("/", employeeRoutes);
 app.use("/", servicesRoutes);
 app.use("/", scheduleRoutes);
 app.use("/auth", authRoutes);
