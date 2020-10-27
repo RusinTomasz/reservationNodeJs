@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/employee/create",
   isAuth,
-  authRole("admin"),
+  authRole(process.env.ADMINPERMISSIONS),
   createEmployeeValidator,
   employeeController.createEmployee
 );

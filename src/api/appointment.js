@@ -8,14 +8,14 @@ const router = express.Router();
 router.post(
   "/appointment/create",
   isAuth,
-  // authRole("admin"),
+  authRole(process.env.EMPLOYEEPERMISSIONS),
   appointmentController.createAppointment
 );
 
 router.put(
   "/appointment/close/:appointmentId",
   isAuth,
-  // authRole("admin"),
+  authRole(process.env.EMPLOYEEPERMISSIONS),
   appointmentController.closeAppointment
 );
 

@@ -9,14 +9,14 @@ const router = express.Router();
 router.get(
   "/services",
   isAuth,
-  authRole("admin"),
+  authRole(process.env.ADMINPERMISSIONS),
   servicesController.fetchServices
 );
 
 router.post(
   "/services/create",
   isAuth,
-  authRole("admin"),
+  authRole(process.env.EMPLOYEEPERMISSIONS),
   createServiceValidator,
   servicesController.createService
 );

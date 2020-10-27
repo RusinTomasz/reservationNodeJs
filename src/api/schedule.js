@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/schedule/create",
   isAuth,
-  authRole("admin"),
+  authRole(process.env.ADMINPERMISSIONS),
   scheduleController.createSchedule
 );
 

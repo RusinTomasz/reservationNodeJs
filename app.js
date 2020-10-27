@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const bodyParser = require("body-parser");
 const logger = require("./src/config/logger");
 const sequlize = require("./src/util/database");
-
+require("dotenv").config();
 /////////database tables
 const User = require("./src/models/user");
 const Client = require("./src/models/client");
@@ -34,7 +34,7 @@ ServiceProvided.belongsTo(Appointment);
 Appointment.hasMany(ServiceBooked, { as: "servicesBooked" });
 ServiceBooked.belongsTo(Appointment);
 AppoitmentStatus.hasMany(Appointment);
-Appointment.belongsTo(AppoitmentStatus, { as: "appoitmentStatus" });
+Appointment.belongsTo(AppoitmentStatus);
 
 Employee.hasMany(Schedule);
 Schedule.belongsTo(Employee);
