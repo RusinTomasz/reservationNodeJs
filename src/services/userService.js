@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 class UserService {
   constructor() {}
 
-  signUp = async (email, firstName, lastName, password) => {
+  signUp = async (email, firstName, lastName, password, phoneNumber) => {
     const emailToken = crypto.randomBytes(64).toString("hex");
     const isVerified = false;
     let user;
@@ -25,8 +25,8 @@ class UserService {
             first_name: firstName,
             last_name: lastName,
             client: {
-              client_name: firstName,
-              contact_mobile: "555555555",
+              client_name: name,
+              contact_mobile: phoneNumber,
               contact_mail: email,
             },
           },
