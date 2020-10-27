@@ -25,7 +25,7 @@ class UserService {
             first_name: firstName,
             last_name: lastName,
             client: {
-              client_name: name,
+              client_name: firstName,
               contact_mobile: phoneNumber,
               contact_mail: email,
             },

@@ -14,6 +14,7 @@ const ServiceProvided = require("./src/models/service-provided");
 const Service = require("./src/models/service");
 const Schedule = require("./src/models/schedule");
 const Employee = require("./src/models/employee");
+const AppoitmentStatus = require("./src/models/appoitment-status");
 
 User.hasOne(Employee, { onDelete: "CASCADE" });
 Employee.belongsTo(User, { onDelete: "CASCADE" });
@@ -32,6 +33,8 @@ Appointment.hasMany(ServiceProvided, { as: "servicesProvided" });
 ServiceProvided.belongsTo(Appointment);
 Appointment.hasMany(ServiceBooked, { as: "servicesBooked" });
 ServiceBooked.belongsTo(Appointment);
+AppoitmentStatus.hasMany(Appointment);
+Appointment.belongsTo(AppoitmentStatus, { as: "appoitmentStatus" });
 
 Employee.hasMany(Schedule);
 Schedule.belongsTo(Employee);

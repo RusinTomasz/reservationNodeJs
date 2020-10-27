@@ -42,7 +42,6 @@ exports.createEmployeeValidator = [
   body("password").trim().isLength({ min: 6 }),
   body("firstName").trim().not().isEmpty(),
   body("lastName").trim().not().isEmpty(),
->>>>>>> a419d40025731aa6f6ab6de74937872fcdee4918
 ];
 
 exports.createServiceValidator = [

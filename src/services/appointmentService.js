@@ -25,6 +25,7 @@ class AppointmentService {
         price_expected: priceExpected,
         clientId: null,
         employeeId: null,
+        appoitmentStatusId: 1,
         servicesBooked: [
           {
             price: priceExpected,
@@ -68,6 +69,7 @@ class AppointmentService {
           price_full: price_full,
           discount: discount,
           price_final: priceFinal,
+          appoitmentStatusId: 2,
         });
         return updatedAppointment;
       })
