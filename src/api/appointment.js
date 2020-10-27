@@ -12,4 +12,11 @@ router.post(
   appointmentController.createAppointment
 );
 
+router.put(
+  "/appointment/close/:appointmentId",
+  isAuth,
+  // authRole("admin"),
+  appointmentController.closeAppointment
+);
+
 module.exports = router;

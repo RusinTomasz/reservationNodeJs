@@ -28,9 +28,9 @@ ServiceBooked.belongsTo(Service);
 Service.hasMany(ServiceProvided);
 ServiceProvided.belongsTo(Service);
 
-Appointment.hasMany(ServiceProvided);
+Appointment.hasMany(ServiceProvided, { as: "servicesProvided" });
 ServiceProvided.belongsTo(Appointment);
-Appointment.hasMany(ServiceBooked);
+Appointment.hasMany(ServiceBooked, { as: "servicesBooked" });
 ServiceBooked.belongsTo(Appointment);
 
 Employee.hasMany(Schedule);

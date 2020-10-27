@@ -44,3 +44,34 @@ exports.createAppointment = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.closeAppointment = async (req, res, next) => {
+  const errors = validationResult(req);
+  try {
+    if (!errors.isEmpty()) {
+      throw createError(422, errors.errors[0].msg);
+    }
+    const { end_time, price_full, discount } = req.body;
+    const { appointmentId } = req.params;
+    const appointmentServiceInstance = new AppointmentService();
+
+    const closedAppointment = await appointmentServiceInstance.closeAppointment(
+      appointmentId,
+      end_time,
+      price_full,
+      discount
+    );
+    if (closedAppointment instanceof Error) {
+      throw createError(closedAppointment.statusCode, closedAppointment);
+    } else {
+      res.status(200).json({
+        closedAppointment,
+      });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};

@@ -1,5 +1,6 @@
 const Appointment = require("../models/appointment");
 const ServiceBooked = require("../models/service-booked");
+const createError = require("http-errors");
 
 class AppointmentService {
   constructor() {}
@@ -24,14 +25,15 @@ class AppointmentService {
         price_expected: priceExpected,
         clientId: null,
         employeeId: null,
-        ServiceBooked: [
+        servicesBooked: [
           {
             price: priceExpected,
+            serviceId: 1,
           },
         ],
       },
       {
-        include: [ServiceBooked],
+        include: [{ model: ServiceBooked, as: "servicesBooked" }],
       }
     )
       .then((result) => result)
@@ -42,6 +44,40 @@ class AppointmentService {
         return error;
       });
     return createdAppointment;
+  };
+
+  closeAppointment = async (appointmentId, end_time, price_full, discount) => {
+    let priceFinal;
+    const closedAppointment = await Appointment.findOne({
+      where: { id: appointmentId },
+    })
+      .then(async (appointment) => {
+        if (!appointment) {
+          throw createError(
+            401,
+            "A appointment with this id could not be found."
+          );
+        }
+        if (discount) {
+          priceFinal = price_full - discount;
+        } else {
+          priceFinal = price_full;
+        }
+        const updatedAppointment = await appointment.update({
+          end_time: end_time,
+          price_full: price_full,
+          discount: discount,
+          price_final: priceFinal,
+        });
+        return updatedAppointment;
+      })
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return closedAppointment;
   };
 }
 
