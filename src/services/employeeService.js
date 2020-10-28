@@ -37,6 +37,30 @@ class EmployeeService {
       });
     return createdUserName;
   };
+
+  fetchEmployees = async () => {
+    const employees = await Employee.findAll({
+      attributes: [
+        "id",
+        ["first_name", "firstName"],
+        ["last_name", "lastName"],
+      ],
+      include: [
+        {
+          model: User,
+          attributes: ["email"],
+        },
+      ],
+    })
+      .then((employees) => employees)
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return employees;
+  };
 }
 
 module.exports = {

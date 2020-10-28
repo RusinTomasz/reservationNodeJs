@@ -6,6 +6,13 @@ const { createEmployeeValidator } = require("../helpers/validators");
 
 const router = express.Router();
 
+router.get(
+  "/employees",
+  isAuth,
+  authRole(process.env.ADMINPERMISSIONS),
+  employeeController.fetchEmployees
+);
+
 router.post(
   "/employee/create",
   isAuth,

@@ -31,3 +31,22 @@ exports.createEmployee = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.fetchEmployees = async (req, res, next) => {
+  try {
+    const employeeServiceInstance = new EmployeeService();
+    const employees = await employeeServiceInstance.fetchEmployees();
+    if (employees instanceof Error) {
+      throw createError(employees.statusCode, employees);
+    } else {
+      res.status(200).json({
+        employees,
+      });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};

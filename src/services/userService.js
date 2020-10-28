@@ -76,9 +76,12 @@ class UserService {
             role: loadeduser.role,
           },
           "dbapasmwij",
-          { expiresIn: "1h" }
+          { expiresIn: "10h" }
         );
         const user = {
+          firstName: loadeduser.first_name,
+          lastName: loadeduser.last_name,
+          email: loadeduser.email,
           token: token,
           userId: loadeduser.id.toString(),
           role: loadeduser.role,

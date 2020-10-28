@@ -41,6 +41,9 @@ exports.login = async (req, res, next) => {
       throw createError(401, user);
     } else {
       res.status(200).json({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
         token: user.token,
         userId: user.userId,
         role: user.role,
