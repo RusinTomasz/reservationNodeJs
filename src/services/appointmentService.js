@@ -23,8 +23,8 @@ class AppointmentService {
         start_time: startTime,
         end_time_expected: endTimeExpected,
         price_expected: priceExpected,
-        clientId: null,
-        employeeId: null,
+        clientId: clientId,
+        employeeId: employeeId,
         appoitmentStatusId: 1,
         servicesBooked: [
           {

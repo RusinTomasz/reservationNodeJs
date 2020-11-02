@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
   "/appointment/create",
   isAuth,
-  authRole(process.env.EMPLOYEEPERMISSIONS),
+  authRole(process.env.CLIENTPERMISSIONS),
   appointmentController.createAppointment
 );
 

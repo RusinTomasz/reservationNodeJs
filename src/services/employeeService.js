@@ -1,7 +1,8 @@
 const Employee = require("../models/employee");
+const Appoitment = require("../models/appointment");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-
+const sequelize = require("sequelize");
 class EmployeeService {
   constructor() {}
   createEmployee = async (email, firstName, lastName, password) => {
@@ -60,6 +61,32 @@ class EmployeeService {
         return error;
       });
     return employees;
+  };
+
+  fetchEmployeeAppoitments = async (employeeId, reqDayOfAppoitments) => {
+    const appoitments = await Appoitment.findAll({
+      attributes: [
+        "id",
+        ["start_time", "startTime"],
+        ["end_time_expected", "endTimeExpected"],
+      ],
+      where: {
+        employeeId: employeeId,
+        date: sequelize.where(
+          sequelize.fn("date", sequelize.col("start_time")),
+          "=",
+          reqDayOfAppoitments
+        ),
+      },
+    })
+      .then((appoitments) => appoitments)
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return appoitments;
   };
 }
 

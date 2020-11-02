@@ -50,3 +50,27 @@ exports.fetchEmployees = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.fetchEmployeeAppoitments = async (req, res, next) => {
+  try {
+    const { reqDayOfAppoitments } = req.query;
+    const { employeeId } = req.params;
+    const employeeServiceInstance = new EmployeeService();
+    const employeeAppoitments = await employeeServiceInstance.fetchEmployeeAppoitments(
+      employeeId,
+      reqDayOfAppoitments
+    );
+    if (employeeAppoitments instanceof Error) {
+      throw createError(employeeAppoitments.statusCode, employeeAppoitments);
+    } else {
+      res.status(200).json({
+        employeeAppoitments,
+      });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};

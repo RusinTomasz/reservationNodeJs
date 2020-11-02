@@ -9,7 +9,7 @@ const router = express.Router();
 router.get(
   "/services",
   isAuth,
-  authRole(process.env.ADMINPERMISSIONS),
+  authRole(process.env.CLIENTPERMISSIONS),
   servicesController.fetchServices
 );
 

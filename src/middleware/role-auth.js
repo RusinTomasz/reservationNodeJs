@@ -3,7 +3,6 @@ const createError = require("http-errors");
 function authRole(role) {
   return async (req, res, next) => {
     try {
-      console.log(role);
       const isAuth = role.includes(req.user.role);
 
       if (!isAuth) {

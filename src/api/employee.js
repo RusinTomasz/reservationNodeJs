@@ -9,7 +9,7 @@ const router = express.Router();
 router.get(
   "/employees",
   isAuth,
-  authRole(process.env.ADMINPERMISSIONS),
+  authRole(process.env.CLIENTPERMISSIONS),
   employeeController.fetchEmployees
 );
 
@@ -19,6 +19,13 @@ router.post(
   authRole(process.env.ADMINPERMISSIONS),
   createEmployeeValidator,
   employeeController.createEmployee
+);
+
+router.get(
+  "/employee/appoitments/:employeeId",
+  isAuth,
+  authRole(process.env.CLIENTPERMISSIONS),
+  employeeController.fetchEmployeeAppoitments
 );
 
 module.exports = router;
