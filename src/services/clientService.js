@@ -7,6 +7,7 @@ class ClientService {
 
   fetchClientAppoitments = async (clientId, archives) => {
     const sequelizeOperator = archives ? Op.lt : Op.gte;
+    const order = archives ? "DESC" : "ASC";
     const appoitments = await Appoitment.findAll({
       attributes: [
         "id",
@@ -29,7 +30,7 @@ class ClientService {
           [sequelizeOperator]: sequelize.literal("CURRENT_TIMESTAMP"),
         },
       },
-      order: [["start_time", "ASC"]],
+      order: [["start_time", order]],
     })
       .then((appoitments) => appoitments)
       .catch((error) => {
