@@ -208,6 +208,23 @@ class UserService {
     return userWhosePassIsToBeReset;
   };
 
+  getClientId = async (userId) => {
+    const clientId = await Client.findOne({
+      attributes: ["id"],
+      where: {
+        userId: userId,
+      },
+    })
+      .then((clientId) => clientId)
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return clientId;
+  };
+
   sendVerificationEmail = async (emailToken, email) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",

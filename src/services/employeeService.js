@@ -3,6 +3,9 @@ const Appoitment = require("../models/appointment");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const sequelize = require("sequelize");
+
+
+
 class EmployeeService {
   constructor() {}
   createEmployee = async (email, firstName, lastName, password) => {

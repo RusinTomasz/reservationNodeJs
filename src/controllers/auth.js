@@ -130,3 +130,23 @@ exports.resetPassword = async (req, res, next) => {
     );
   }
 };
+
+exports.getClientId = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const authServiceInstance = new UserService();
+    const clientId = await authServiceInstance.getClientId(userId);
+    if (clientId instanceof Error) {
+      throw createError(clientId.statusCode, clientId);
+    } else {
+      res.status(200).json({
+        clientId,
+      });
+    }
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};
