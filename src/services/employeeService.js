@@ -3,6 +3,9 @@ const Appoitment = require("../models/appointment");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const sequelize = require("sequelize");
+const { Op } = require("sequelize");
+const ServiceBooked = require("../models/service-booked");
+const Service = require("../models/service");
 
 class EmployeeService {
   constructor() {}
@@ -79,6 +82,48 @@ class EmployeeService {
           reqDayOfAppoitments
         ),
       },
+    })
+      .then((appoitments) => appoitments)
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        return error;
+      });
+    return appoitments;
+  };
+
+  fetchEmployeeAppoitments = async (employeeId, archives) => {
+    const sequelizeOperator = archives ? Op.lt : Op.gte;
+    const order = archives ? "DESC" : "ASC";
+    const appoitments = await Appoitment.findAll({
+      attributes: [
+        "id",
+        ["client_name", "clientName"],
+        ["start_time", "startTime"],
+        ["end_time_expected", "endTimeExpected"],
+        ["price_expected", "priceExpected"],
+      ],
+      include: [
+        {
+          model: ServiceBooked,
+          as: "servicesBooked",
+          attributes: ["serviceId"],
+          include: [
+            {
+              model: Service,
+              attributes: ["service_name"],
+            },
+          ],
+        },
+      ],
+      where: {
+        employeeId: employeeId,
+        start_time: {
+          [sequelizeOperator]: sequelize.literal("CURRENT_TIMESTAMP"),
+        },
+      },
+      order: [["start_time", order]],
     })
       .then((appoitments) => appoitments)
       .catch((error) => {
