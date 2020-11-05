@@ -25,6 +25,13 @@ router.get(
   "/employee/appoitments/daily/:employeeId",
   isAuth,
   authRole(process.env.CLIENTPERMISSIONS),
+  employeeController.fetchEmployeeDailyAppoitments
+);
+
+router.get(
+  "/employee/appoitments/:employeeId",
+  isAuth,
+  authRole(process.env.EMPLOYEEPERMISSIONS),
   employeeController.fetchEmployeeAppoitments
 );
 

@@ -4,8 +4,6 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const sequelize = require("sequelize");
 
-
-
 class EmployeeService {
   constructor() {}
   createEmployee = async (email, firstName, lastName, password) => {
@@ -66,7 +64,7 @@ class EmployeeService {
     return employees;
   };
 
-  fetchEmployeeAppoitments = async (employeeId, reqDayOfAppoitments) => {
+  fetchEmployeeDailyAppoitments = async (employeeId, reqDayOfAppoitments) => {
     const appoitments = await Appoitment.findAll({
       attributes: [
         "id",
