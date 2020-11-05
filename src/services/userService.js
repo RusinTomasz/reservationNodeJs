@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
+const Employee = require("../models/employee");
 
 class UserService {
   constructor() {}
@@ -57,6 +58,16 @@ class UserService {
       where: {
         email: email,
       },
+      include: [
+        {
+          model: Client,
+          attributes: ["id"],
+        },
+        {
+          model: Employee,
+          attributes: ["id"],
+        },
+      ],
     })
       .then((user) => {
         if (!user) {
@@ -66,9 +77,26 @@ class UserService {
         return bcrypt.compare(password, user.password);
       })
       .then((isEqual) => {
+        let clientId = null;
+        let employeeId = null;
         if (!isEqual) {
           throw createError(401, "Wrong password!");
         }
+        if (
+          loadeduser.employee &&
+          loadeduser.employee.dataValues &&
+          loadeduser.employee.dataValues.id
+        ) {
+          employeeId = loadeduser.employee.dataValues.id;
+        }
+        if (
+          loadeduser.client &&
+          loadeduser.client.dataValues &&
+          loadeduser.client.dataValues.id
+        ) {
+          clientId = loadeduser.client.dataValues.id;
+        }
+
         const token = jwt.sign(
           {
             email: loadeduser.email,
@@ -85,6 +113,8 @@ class UserService {
           token: token,
           userId: loadeduser.id.toString(),
           role: loadeduser.role,
+          clientId: clientId,
+          employeeId: employeeId,
         };
         return user;
       })
