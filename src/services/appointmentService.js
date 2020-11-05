@@ -12,6 +12,7 @@ class AppointmentService {
     startTime,
     endTimeExpected,
     priceExpected,
+    serviceId,
     clientId,
     employeeId
   ) => {
@@ -29,7 +30,7 @@ class AppointmentService {
         servicesBooked: [
           {
             price: priceExpected,
-            serviceId: 1,
+            serviceId: serviceId,
           },
         ],
       },

@@ -15,6 +15,7 @@ exports.createAppointment = async (req, res, next) => {
       startTime,
       endTimeExpected,
       priceExpected,
+      serviceId,
       clientId,
       employeeId,
     } = req.body;
@@ -27,6 +28,7 @@ exports.createAppointment = async (req, res, next) => {
       startTime,
       endTimeExpected,
       priceExpected,
+      serviceId,
       clientId,
       employeeId
     );

@@ -2,6 +2,8 @@ const Appoitment = require("../models/appointment");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const Employee = require("../models/employee");
+const ServiceBooked = require("../models/service-booked");
+const Service = require("../models/service");
 class ClientService {
   constructor() {}
 
@@ -21,6 +23,17 @@ class ClientService {
           attributes: [
             ["first_name", "firstName"],
             ["last_name", "lastName"],
+          ],
+        },
+        {
+          model: ServiceBooked,
+          as: "servicesBooked",
+          attributes: ["serviceId"],
+          include: [
+            {
+              model: Service,
+              attributes: ["service_name"],
+            },
           ],
         },
       ],
