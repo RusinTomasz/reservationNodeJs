@@ -22,7 +22,7 @@ router.post(
 );
 
 router.get(
-  "/employee/appoitments/:employeeId",
+  "/employee/appoitments/daily/:employeeId",
   isAuth,
   authRole(process.env.CLIENTPERMISSIONS),
   employeeController.fetchEmployeeAppoitments
